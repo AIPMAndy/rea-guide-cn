@@ -36,7 +36,6 @@ jobs:
           test -f .github/workflows/pages.yml
           test -f LICENSE
           rm -rf .release
-          rm .github/workflows/pages.yml
       - name: Run project tests before publishing
         run: |
           set -euo pipefail
@@ -50,6 +49,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          rm .github/workflows/pages.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
