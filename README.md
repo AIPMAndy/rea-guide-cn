@@ -6,8 +6,8 @@
 
 ![REA 教程封面](assets/social-preview.svg)
 
-**官网（发布后）**：`https://aipmandy.github.io/rea-guide-cn/`（在 Pages 部署成功前不应声称可访问）  
-**目标 GitHub 仓库（尚需创建）**：`AIPMAndy/rea-guide-cn`；官方工具仓库：<https://github.com/morluto/rea>。
+**GitHub（已正式公开）**：[AIPMAndy/rea-guide-cn](https://github.com/AIPMAndy/rea-guide-cn)（完整 V5 · 177 文件 · MIT 源码许可）  
+**网站（GitHub Pages 待启用）**：`https://aipmandy.github.io/rea-guide-cn/`（尚未确认正式可访问）；官方 REA 项目：<https://github.com/morluto/rea>。
 
 ## 这份教程有什么
 
