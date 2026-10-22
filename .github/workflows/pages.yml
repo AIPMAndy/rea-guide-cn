@@ -1,0 +1,49 @@
+name: Validate and deploy REA Guide
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: rea-guide-pages
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Content and link integrity
+        run: python3 -m unittest discover -s tests -v
+      - name: JavaScript syntax
+        run: node --check assets/site.js && node --check assets/contact.js && node --check examples/mini-app/src/order.js
+      - name: Run original sample
+        run: node examples/mini-app/test.mjs
+      - name: Run offline synthetic model fixture tests
+        run: python3 -m unittest discover -s examples/model-metadata -p 'test_*.py' -v
+      - name: Validate evidence manifest
+        run: python3 tools/validate_evidence.py examples/mini-app/evidence-manifest.json
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
