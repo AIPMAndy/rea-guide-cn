@@ -1,0 +1,48 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>.NET 程序分析｜REA 逆向万物保姆级攻略</title><meta name="description" content="REA 逆向工程开源中文教程，逐步操作、证据链、反证和安全验收。"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/reader.css"></head><body>
+<a class="skip" href="#content">跳到正文</a>
+<header class="topbar"><div class="wrap nav"><a class="brand" href="../../index.html#chapters"><span class="brand-icon">R<span>✦</span></span><span>REA <strong>FIELD GUIDE</strong><small>完整中文阅读版 · V5</small></span></a><nav class="desktopnav"><a href="../../index.html">网站首页</a><a href="../../index.html#prompts">64 条指令</a><a href="../../index.html#coverage">官方能力</a><a href="../docs/SAFETY.html">安全</a></nav><div class="navcontact"><button type="button" data-wechat>微信 AIPMAndy</button><a href="https://metaver.vip/" target="_blank" rel="noopener noreferrer">作者官网 ↗</a></div></div></header>
+<div class="reading-banner"><div class="wrap"><span>REA FIELD NOTES / READABLE EDITION</span><h1>.NET 程序分析</h1><p>完整内容可读 · 保留上游来源 · 明确标记未实测能力</p></div></div>
+<div class="wrap reading-grid"><aside class="reader-sidebar"><strong>38 章完整目录</strong><nav aria-label="章节目录"><a  href="01-intro.html">01　认识 REA 与边界</a><a  href="02-install-mac.html">02　Mac 从零安装</a><a  href="03-install-cross-platform.html">03　Windows 与 Linux</a><a  href="04-agents.html">04　Codex / Claude / Cursor 接入</a><a  href="05-first-lab.html">05　首个十分钟逆向任务</a><a  href="06-cli.html">06　REA CLI 常用命令</a><a  href="07-evidence.html">07　Evidence 证据链</a><a  href="08-javascript-electron.html">08　JavaScript / Electron 逆向</a><a  href="09-website.html">09　网页与运行观察</a><a  href="10-native.html">10　原生程序与反编译器</a><a  href="11-calculator.html">11　Windows Calculator 百分号案例</a><a  href="12-dinosaur.html">12　Chrome 小恐龙加速规则案例</a><a  href="13-android.html">13　Android APK 静态分析</a><a aria-current=page class=active href="14-dotnet.html">14　.NET 程序分析</a><a  href="15-formats.html">15　Go / Rust / WASM / ELF</a><a  href="16-sqlite.html">16　SQLite、JSON 与本地数据</a><a  href="17-captures.html">17　网络抓包和动态行为</a><a  href="18-prompts.html">18　提示词设计与反证</a><a  href="19-rebuild.html">19　从观察到重建</a><a  href="20-troubleshoot.html">20　安装故障排除</a><a  href="21-maintenance.html">21　更新、迁移与卸载</a><a  href="22-legal.html">22　许可、隐私与负责任使用</a><a  href="23-contribute.html">23　发布 Evidence 与社区协作</a><a  href="24-indie-workflow.html">24　一人开发者逆向工作流</a><a  href="25--.html">25　桌面安装目录的构成与分析入口</a><a  href="26-go-rust-.html">26　Go / Rust 产物元数据与供应链线索</a><a  href="27-gpu-code-objects.html">27　GPU 二进制、PTX 与设备兼容性</a><a  href="28-gguf-safetensors.html">28　GGUF / safetensors 模型文件检查</a><a  href="29-il2cpp-metadata.html">29　Unity IL2CPP 元数据安全检查</a><a  href="30-godot-pck.html">30　Godot PCK 资源结构与可复现导出</a><a  href="31-wasm-artifact.html">31　WASM 模块导入导出与 ABI 理解</a><a  href="32-offline-evm.html">32　EVM 字节码只读结构调查</a><a  href="33-android-devices.html">33　Android ADB 与设备取证范围</a><a  href="34-flutter-metadata.html">34　Flutter / Dart APK 构建来源观察</a><a  href="35-firmware.html">35　固件镜像清单与安全抽取</a><a  href="36-saved-captures.html">36　HAR / PCAP / 崩溃记录取证</a><a  href="37-pyinstaller.html">37　PyInstaller Python 打包程序静态识别</a><a  href="38-process-behavior.html">38　受控进程运行与 Evidence 对照实验</a></nav></aside><main id="content" class="reading-main"><div class="reading-top"><a href="../../index.html#chapters">← 返回目录</a><a href="https://github.com/AIPMAndy/rea-guide-cn/blob/main/guides/14-dotnet.md" target="_blank" rel="noopener noreferrer">查看 Markdown 原文 ↗</a></div><div class="prose"><h1 id="14-net-程序分析">14｜.NET 程序分析</h1>
+<blockquote>
+<p>目标：使用静态元数据与 CIL 还原功能逻辑边界。<br/>
+分类：应用｜核查日期：2026-10-21｜状态：<strong>操作方案，需读者在自己环境中验证</strong>。</p>
+</blockquote>
+<p><a href="../../index.html">返回首页</a> · <a href="../docs/SOURCES.html">官方来源</a> · <a href="../docs/SAFETY.html">安全与许可</a></p>
+<h2 id="前置条件">前置条件</h2>
+<ul>
+<li>只分析自己拥有或获明确许可的目标；不要破解许可证、规避 DRM、探测陌生账号或收集第三方私人信息。</li>
+<li>先记录操作系统、目标版本、REA CLI/npx 实际版本、Node/npm 版本和分析目标 SHA256。</li>
+<li>静态线索、运行行为、独立猜测、已测试重建必须各自标注来源。<strong>不把 Agent 的“完成了”当成功证据。</strong></li>
+</ul>
+<h2 id="跟着做">跟着做</h2>
+<ol>
+<li><strong>第 1 步</strong>：准备你拥有源码的小型 .NET 程序，使用 Release 构建。</li>
+<li><strong>第 2 步</strong>：记录 PE/CLI 文件哈希、版本、依赖和导出信息。</li>
+<li><strong>第 3 步</strong>：以 REA 官方 managed-code 能力验证类型、方法与 CIL。</li>
+<li><strong>第 4 步</strong>：人工比较反编译推断与原 C# 代码，标出缺失项。</li>
+<li><strong>第 5 步</strong>：再次用不同测试输入验证行为等价，禁止臆造类型名称。</li>
+</ol>
+<h2 id="可复制的-agent-指令">可复制的 Agent 指令</h2>
+<pre><code class="language-text">我正在做合法授权的 REA 逆向研究，目标是【自己的软件/公开授权样本】。
+任务：对授权的 .NET 示例检查 CIL 方法调用和参数，输出“观察值/推测含义/可复现测试”，以真实 help 输出选择工具。
+范围：只读分析，只有真实许可证允许的对象和数据；不要下载未知二进制、修改应用、登录未授权账号、提取秘密或绕过 DRM。
+输出：操作前提/可用工具/直接观察与路径/证据/仍需验证的推断/下一步最小实验。
+在进行任何配置更改、软件安装或运行目标程序前，先向我展示计划并等待批准。
+</code></pre>
+<h2 id="验收清单">验收清单</h2>
+<ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>原始目标来源、版本和授权范围可追溯。</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>每个主要主张有真实文件路径/函数地址/调用引用或行为证据。</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>记录真实命令和执行结果；<strong>若未运行 REA，则明示未运行</strong>。</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>提供一个可以推翻主结论的实验。</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>没有泄露个人信息、密钥或第三方受版权保护资源。</li>
+</ul>
+<h2 id="红队审核">红队审核</h2>
+<p><strong>高频误区：</strong>方法列表和元数据不能直接证明真实运行分支。</p>
+<p><strong>反证问题：</strong>如果当前观察来自另一版本、另一分支或模拟环境，结论是否还成立？若无法证实，就改写为“有待验证”。</p>
+<h2 id="延伸阅读">延伸阅读</h2>
+<p><a href="https://github.com/morluto/rea/blob/main/docs/installation.md" rel="noopener noreferrer" target="_blank">REA 安装官方文档</a> · <a href="https://github.com/morluto/rea" rel="noopener noreferrer" target="_blank">REA 官方仓库</a> · <a href="../templates/experiment.html">实验记录模板</a></p>
+<hr/>
+<p>独立中文教程，非 REA 官方出品。AI 酋长 Andy · 微信 <strong>AIPMAndy</strong> · https://metaver.vip/</p>
+</div><div class="reader-next"><a href="13-android.html">← 上一章：Android APK 静态分析</a><a href="15-formats.html">下一章：Go / Rust / WASM / ELF →</a></div><div class="reading-cta"><div><strong>AI 酋长 Andy</strong><p>免费开源教程，可持续提交实测与反证。微信：AIPMAndy</p></div><div><button type="button" data-wechat>复制微信号</button><a href="https://metaver.vip/" target="_blank" rel="noopener noreferrer">我的官网 ↗</a></div></div></main></div>
+<div class="mobile-cta"><button type="button" data-wechat>微信 AIPMAndy · 复制</button><a href="https://metaver.vip/">作者官网 ↗</a></div><div class="toast" id="toast" role="status" aria-live="polite"></div><script src="../../assets/contact.js" defer></script></body></html>

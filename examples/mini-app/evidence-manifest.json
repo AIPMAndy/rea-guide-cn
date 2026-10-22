@@ -1,0 +1,9 @@
+{
+  "id": "mini-app-code-review",
+  "kind": "self-owned-source",
+  "source": "examples/mini-app/src/order.js",
+  "sha256": "c53800c1730ea4d7927c2c567272f31e2ec0a73cceb69c6b25c4c512046c0acd",
+  "result": "源码中 summarizeOrder 计算 subtotal、discount 和 total",
+  "status": "T-local",
+  "limitations": "仅核验源文件完整性；不是REA引擎的Evidence"
+}

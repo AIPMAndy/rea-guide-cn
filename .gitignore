@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.DS_Store
+.env
+node_modules/
+.venv/
+*.log
+*.har
+*.pcap
+*.pcapng
+*.dmp
+.secrets/

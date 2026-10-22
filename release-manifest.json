@@ -1,0 +1,13 @@
+{
+  "version": "5.0.0",
+  "generated": "2026-10-21",
+  "chapters": 38,
+  "prompts": 64,
+  "cases": 12,
+  "capabilities": 28,
+  "full_html_readers": 72,
+  "tests": "21 project test methods + 2 synthetic sample tests + 5 original Node fixture assertions + JS syntax and evidence manifest",
+  "rea_executed": false,
+  "github_published": false,
+  "release_files": 177
+}

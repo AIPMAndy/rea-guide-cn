@@ -1,0 +1,87 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>固件镜像清单与安全抽取｜REA 逆向万物保姆级攻略</title><meta name="description" content="REA 逆向工程开源中文教程，逐步操作、证据链、反证和安全验收。"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../../assets/site.css"><link rel="stylesheet" href="../../assets/reader.css"></head><body>
+<a class="skip" href="#content">跳到正文</a>
+<header class="topbar"><div class="wrap nav"><a class="brand" href="../../index.html#chapters"><span class="brand-icon">R<span>✦</span></span><span>REA <strong>FIELD GUIDE</strong><small>完整中文阅读版 · V5</small></span></a><nav class="desktopnav"><a href="../../index.html">网站首页</a><a href="../../index.html#prompts">64 条指令</a><a href="../../index.html#coverage">官方能力</a><a href="../docs/SAFETY.html">安全</a></nav><div class="navcontact"><button type="button" data-wechat>微信 AIPMAndy</button><a href="https://metaver.vip/" target="_blank" rel="noopener noreferrer">作者官网 ↗</a></div></div></header>
+<div class="reading-banner"><div class="wrap"><span>REA FIELD NOTES / READABLE EDITION</span><h1>固件镜像清单与安全抽取</h1><p>完整内容可读 · 保留上游来源 · 明确标记未实测能力</p></div></div>
+<div class="wrap reading-grid"><aside class="reader-sidebar"><strong>38 章完整目录</strong><nav aria-label="章节目录"><a  href="01-intro.html">01　认识 REA 与边界</a><a  href="02-install-mac.html">02　Mac 从零安装</a><a  href="03-install-cross-platform.html">03　Windows 与 Linux</a><a  href="04-agents.html">04　Codex / Claude / Cursor 接入</a><a  href="05-first-lab.html">05　首个十分钟逆向任务</a><a  href="06-cli.html">06　REA CLI 常用命令</a><a  href="07-evidence.html">07　Evidence 证据链</a><a  href="08-javascript-electron.html">08　JavaScript / Electron 逆向</a><a  href="09-website.html">09　网页与运行观察</a><a  href="10-native.html">10　原生程序与反编译器</a><a  href="11-calculator.html">11　Windows Calculator 百分号案例</a><a  href="12-dinosaur.html">12　Chrome 小恐龙加速规则案例</a><a  href="13-android.html">13　Android APK 静态分析</a><a  href="14-dotnet.html">14　.NET 程序分析</a><a  href="15-formats.html">15　Go / Rust / WASM / ELF</a><a  href="16-sqlite.html">16　SQLite、JSON 与本地数据</a><a  href="17-captures.html">17　网络抓包和动态行为</a><a  href="18-prompts.html">18　提示词设计与反证</a><a  href="19-rebuild.html">19　从观察到重建</a><a  href="20-troubleshoot.html">20　安装故障排除</a><a  href="21-maintenance.html">21　更新、迁移与卸载</a><a  href="22-legal.html">22　许可、隐私与负责任使用</a><a  href="23-contribute.html">23　发布 Evidence 与社区协作</a><a  href="24-indie-workflow.html">24　一人开发者逆向工作流</a><a  href="25--.html">25　桌面安装目录的构成与分析入口</a><a  href="26-go-rust-.html">26　Go / Rust 产物元数据与供应链线索</a><a  href="27-gpu-code-objects.html">27　GPU 二进制、PTX 与设备兼容性</a><a  href="28-gguf-safetensors.html">28　GGUF / safetensors 模型文件检查</a><a  href="29-il2cpp-metadata.html">29　Unity IL2CPP 元数据安全检查</a><a  href="30-godot-pck.html">30　Godot PCK 资源结构与可复现导出</a><a  href="31-wasm-artifact.html">31　WASM 模块导入导出与 ABI 理解</a><a  href="32-offline-evm.html">32　EVM 字节码只读结构调查</a><a  href="33-android-devices.html">33　Android ADB 与设备取证范围</a><a  href="34-flutter-metadata.html">34　Flutter / Dart APK 构建来源观察</a><a aria-current=page class=active href="35-firmware.html">35　固件镜像清单与安全抽取</a><a  href="36-saved-captures.html">36　HAR / PCAP / 崩溃记录取证</a><a  href="37-pyinstaller.html">37　PyInstaller Python 打包程序静态识别</a><a  href="38-process-behavior.html">38　受控进程运行与 Evidence 对照实验</a></nav></aside><main id="content" class="reading-main"><div class="reading-top"><a href="../../index.html#chapters">← 返回目录</a><a href="https://github.com/AIPMAndy/rea-guide-cn/blob/main/guides/35-firmware.md" target="_blank" rel="noopener noreferrer">查看 Markdown 原文 ↗</a></div><div class="prose"><h1 id="35-固件镜像清单与安全抽取">35｜固件镜像清单与安全抽取</h1>
+<blockquote>
+<p><strong>目标：</strong>建立低风险只读固件分析路线。<br/>
+<strong>适用对象：</strong>Firmware｜审核日期：2026-10-21｜证据状态：<strong>O 上游描述，E 操作方案，未获得 T-REA 实测结果</strong>。</p>
+</blockquote>
+<p><a href="../../index.html">返回首页</a> · <a href="https://github.com/morluto/rea#what-you-can-analyze" rel="noopener noreferrer" target="_blank">官方功能表</a> · <a href="../docs/PROVENANCE.html">证据等级</a> · <a href="../docs/SAFETY.html">安全许可</a></p>
+<h2 id="你要解决的具体问题">你要解决的具体问题</h2>
+<p>建立低风险只读固件分析路线。建议先做一个自己编译、能够公开完整输入输出的样例。REA 上游列出的能力可能尚未进入正在使用的 npm 版本，必须检查本机的 <code>rea --help</code>、<code>rea capabilities</code> 或所安装包实际清单。</p>
+<h2 id="环境与授权检查">环境与授权检查</h2>
+<ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>文件来源、授权范围、版本、SHA256 和可公开的输出边界已记录。</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>已确认此类型在 <strong>当前已安装发行版</strong> 可用，而非仅在 GitHub 主分支存在。</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>若需要外部工具，单独核对系统支持、许可证、版本和工具链安装方式。</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>只读为默认模式；运行、提取、文件改动、捕获流量前单独审批。</li>
+</ul>
+<h2 id="六步完整流程">六步完整流程</h2>
+<h3 id="步骤-1-仅研究自己设备的开放固件-或供应商公开且许可允许的测试镜像">步骤 1｜仅研究自己设备的开放固件，或供应商公开且许可允许的测试镜像。</h3>
+<h3 id="步骤-2-先记录-sha256-固件型号与版本-下载来源-避免将未知二进制直接刷写到真实设备">步骤 2｜先记录 SHA256、固件型号与版本、下载来源，避免将未知二进制直接刷写到真实设备。</h3>
+<h3 id="步骤-3-检查-binwalk-unblob-和-rea-的-linux-支持边界-明确需由用户自行提供的工具和许可">步骤 3｜检查 Binwalk/Unblob 和 REA 的 Linux 支持边界，明确需由用户自行提供的工具和许可。</h3>
+<h3 id="步骤-4-先做镜像内容区段与文件系统候选扫描-留下偏移及证据">步骤 4｜先做镜像内容区段与文件系统候选扫描，留下偏移及证据。</h3>
+<h3 id="步骤-5-在隔离目录内做必要抽取-核对文件数量与哈希-不运行其中未知程序">步骤 5｜在隔离目录内做必要抽取，核对文件数量与哈希，不运行其中未知程序。</h3>
+<h3 id="步骤-6-不要发布密钥-配置秘密和厂商受保护组件-不提供绕过签名或保护的步骤">步骤 6｜不要发布密钥、配置秘密和厂商受保护组件，不提供绕过签名或保护的步骤。</h3>
+<h2 id="可复制任务指令">可复制任务指令</h2>
+<pre><code class="language-text">目标：只检查我合法获得的固件测试镜像的区域、偏移和文件类型，抽取前先列权限及安全计划，禁止刷机或启动镜像中的文件。
+分析目标：【自己编译或具有明确授权的样例绝对路径】
+授权范围：【所有权/许可与禁止事项】
+环境：【系统/REA版本/Node版本/可用provider/辅助工具】
+安全约束：先仅做只读分析。未被明确批准前不运行不可信程序，不自动联网、不解密、不绕过许可、不读取或外传任何私人账号、密钥、证件与客户数据。
+交付：操作与证据对应表、实际命令、原始文件与哈希、直接观察、推断、反证、失败信息及下一次最小测试。
+失败策略：若能力不存在或命令返回不支持，记录事实并停止，不构造不存在的参数或假装已完成。
+</code></pre>
+<h2 id="证据与推断对照表">证据与推断对照表</h2>
+<table>
+<thead>
+<tr>
+<th>结论</th>
+<th>原始证据</th>
+<th>验证方法</th>
+<th>允许的表述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>支持该类型的检查</td>
+<td>当前版本的 <code>--help</code> / 实际返回</td>
+<td>本机查看、保留退出码</td>
+<td>本机版本已证实 / 未验证</td>
+</tr>
+<tr>
+<td>样本包含特定结构</td>
+<td>本地测试文件、偏移或元数据输出</td>
+<td>对照自己编译的样例</td>
+<td>直接观察；不得推演完整业务逻辑</td>
+</tr>
+<tr>
+<td>推断程序行为</td>
+<td>静态关系或元数据</td>
+<td>独立运行样例与边界测试</td>
+<td>假设，需进一步证实</td>
+</tr>
+</tbody>
+</table>
+<h2 id="失败场景与红队审核">失败场景与红队审核</h2>
+<p><strong>主要风险：</strong>文件系统签名和扫描器命中可能是假阳性，需抽样验证。</p>
+<ul>
+<li>若无法找到真实来源/数据，应标明“未验证”，不得由 AI 补造文件位置或函数地址。</li>
+<li>不能依赖某个工具的“成功”字符串证明真实业务结果；重要结论需以自有样例复验。</li>
+<li>避免在 GitHub Issue 分享未脱敏的原始程序、截图、网络载荷、密钥与合同资料。</li>
+</ul>
+<h2 id="验收清单">验收清单</h2>
+<ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>能提供<strong>自己有权使用</strong>的目标文件与复现环境。</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>至少三项结论明确区分直接观察 / 推断 / 待验证。</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>至少一个可推翻主结论的测试与预期结果已经列出。</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>记录工具版本、辅助依赖、完整命令、退出状态与人工复核情况。</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"/>如果未执行 REA，明确标记“未运行 REA”，不使用想象中的工具输出。</li>
+</ul>
+<h2 id="进一步阅读">进一步阅读</h2>
+<p><a href="https://github.com/morluto/rea" rel="noopener noreferrer" target="_blank">REA 官方仓库</a> · <a href="https://github.com/morluto/rea/blob/main/docs/cli.md" rel="noopener noreferrer" target="_blank">官方 CLI / Evidence</a> · <a href="../templates/experiment.html">实验模板</a> · <a href="../docs/BENCHMARK.html">真实实验协议</a></p>
+<hr/>
+<p>非 REA 官方中文教程。作者 <strong>AI 酋长 Andy</strong> · 微信 <strong>AIPMAndy</strong> · 官网 https://metaver.vip/ · <a href="https://metaver.vip/services" rel="noopener noreferrer" target="_blank">咨询服务</a></p>
+</div><div class="reader-next"><a href="34-flutter-metadata.html">← 上一章：Flutter / Dart APK 构建来源观察</a><a href="36-saved-captures.html">下一章：HAR / PCAP / 崩溃记录取证 →</a></div><div class="reading-cta"><div><strong>AI 酋长 Andy</strong><p>免费开源教程，可持续提交实测与反证。微信：AIPMAndy</p></div><div><button type="button" data-wechat>复制微信号</button><a href="https://metaver.vip/" target="_blank" rel="noopener noreferrer">我的官网 ↗</a></div></div></main></div>
+<div class="mobile-cta"><button type="button" data-wechat>微信 AIPMAndy · 复制</button><a href="https://metaver.vip/">作者官网 ↗</a></div><div class="toast" id="toast" role="status" aria-live="polite"></div><script src="../../assets/contact.js" defer></script></body></html>

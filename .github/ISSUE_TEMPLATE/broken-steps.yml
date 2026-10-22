@@ -1,0 +1,28 @@
+name: 操作步骤失效 / 安装问题
+about: 反馈可复现问题，不要公开个人隐私或未经许可的目标
+body:
+  - type: markdown
+    attributes:
+      value: '禁止提交真实密码、Cookie、令牌、私有软件源码、客户数据、完整未脱敏网络抓包。'
+  - type: input
+    id: chapter
+    attributes:
+      label: 章节 / 页面链接
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: REA / Node / OS / provider 版本（脱敏）
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 实际操作步骤与预期、实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 官方来源、确认日期、脱敏输出及反证

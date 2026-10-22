@@ -1,0 +1,25 @@
+name: 新增可复现证据
+about: O/E/T-local/T-REA 的证据分级、复现实验和版本条件
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: 证据等级
+      options:
+        - O 官方文档
+        - E 教学实验方案
+        - T-local 自有代码测试
+        - T-REA 实际运行 REA
+        - U 尚未验证
+    validations:
+      required: true
+  - type: textarea
+    id: detail
+    attributes:
+      label: 来源、日期、系统、REA版本、哈希与实际可验证结果
+    validations:
+      required: true
+  - type: textarea
+    id: limits
+    attributes:
+      label: 限制、反证与隐私处理

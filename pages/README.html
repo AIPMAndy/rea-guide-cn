@@ -1,0 +1,112 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>README｜REA 逆向万物保姆级攻略</title><meta name="description" content="REA 逆向工程开源中文教程，逐步操作、证据链、反证和安全验收。"><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"><link rel="stylesheet" href="../assets/reader.css"></head><body>
+<a class="skip" href="#content">跳到正文</a>
+<header class="topbar"><div class="wrap nav"><a class="brand" href="../index.html#chapters"><span class="brand-icon">R<span>✦</span></span><span>REA <strong>FIELD GUIDE</strong><small>完整中文阅读版 · V5</small></span></a><nav class="desktopnav"><a href="../index.html">网站首页</a><a href="../index.html#prompts">64 条指令</a><a href="../index.html#coverage">官方能力</a><a href="docs/SAFETY.html">安全</a></nav><div class="navcontact"><button type="button" data-wechat>微信 AIPMAndy</button><a href="https://metaver.vip/" target="_blank" rel="noopener noreferrer">作者官网 ↗</a></div></div></header>
+<div class="reading-banner"><div class="wrap"><span>REA FIELD NOTES / READABLE EDITION</span><h1>README</h1><p>完整内容可读 · 保留上游来源 · 明确标记未实测能力</p></div></div>
+<div class="wrap reading-grid"><aside class="reader-sidebar"><strong>38 章完整目录</strong><nav aria-label="章节目录"><a  href="guides/01-intro.html">01　认识 REA 与边界</a><a  href="guides/02-install-mac.html">02　Mac 从零安装</a><a  href="guides/03-install-cross-platform.html">03　Windows 与 Linux</a><a  href="guides/04-agents.html">04　Codex / Claude / Cursor 接入</a><a  href="guides/05-first-lab.html">05　首个十分钟逆向任务</a><a  href="guides/06-cli.html">06　REA CLI 常用命令</a><a  href="guides/07-evidence.html">07　Evidence 证据链</a><a  href="guides/08-javascript-electron.html">08　JavaScript / Electron 逆向</a><a  href="guides/09-website.html">09　网页与运行观察</a><a  href="guides/10-native.html">10　原生程序与反编译器</a><a  href="guides/11-calculator.html">11　Windows Calculator 百分号案例</a><a  href="guides/12-dinosaur.html">12　Chrome 小恐龙加速规则案例</a><a  href="guides/13-android.html">13　Android APK 静态分析</a><a  href="guides/14-dotnet.html">14　.NET 程序分析</a><a  href="guides/15-formats.html">15　Go / Rust / WASM / ELF</a><a  href="guides/16-sqlite.html">16　SQLite、JSON 与本地数据</a><a  href="guides/17-captures.html">17　网络抓包和动态行为</a><a  href="guides/18-prompts.html">18　提示词设计与反证</a><a  href="guides/19-rebuild.html">19　从观察到重建</a><a  href="guides/20-troubleshoot.html">20　安装故障排除</a><a  href="guides/21-maintenance.html">21　更新、迁移与卸载</a><a  href="guides/22-legal.html">22　许可、隐私与负责任使用</a><a  href="guides/23-contribute.html">23　发布 Evidence 与社区协作</a><a  href="guides/24-indie-workflow.html">24　一人开发者逆向工作流</a><a  href="guides/25--.html">25　桌面安装目录的构成与分析入口</a><a  href="guides/26-go-rust-.html">26　Go / Rust 产物元数据与供应链线索</a><a  href="guides/27-gpu-code-objects.html">27　GPU 二进制、PTX 与设备兼容性</a><a  href="guides/28-gguf-safetensors.html">28　GGUF / safetensors 模型文件检查</a><a  href="guides/29-il2cpp-metadata.html">29　Unity IL2CPP 元数据安全检查</a><a  href="guides/30-godot-pck.html">30　Godot PCK 资源结构与可复现导出</a><a  href="guides/31-wasm-artifact.html">31　WASM 模块导入导出与 ABI 理解</a><a  href="guides/32-offline-evm.html">32　EVM 字节码只读结构调查</a><a  href="guides/33-android-devices.html">33　Android ADB 与设备取证范围</a><a  href="guides/34-flutter-metadata.html">34　Flutter / Dart APK 构建来源观察</a><a  href="guides/35-firmware.html">35　固件镜像清单与安全抽取</a><a  href="guides/36-saved-captures.html">36　HAR / PCAP / 崩溃记录取证</a><a  href="guides/37-pyinstaller.html">37　PyInstaller Python 打包程序静态识别</a><a  href="guides/38-process-behavior.html">38　受控进程运行与 Evidence 对照实验</a></nav></aside><main id="content" class="reading-main"><div class="reading-top"><a href="../index.html#chapters">← 返回目录</a><a href="https://github.com/AIPMAndy/rea-guide-cn/blob/main/README.md" target="_blank" rel="noopener noreferrer">查看 Markdown 原文 ↗</a></div><div class="prose"><h1 id="rea-逆向万物-保姆级中文实战指南">REA 逆向万物 · 保姆级中文实战指南</h1>
+<blockquote>
+<p>从 Mac + Codex 安装到 Evidence 证据链、JavaScript/Electron、Web、Native、Android 等授权逆向工程。<strong>独立中文教程，不属于 REA 官方项目。</strong></p>
+</blockquote>
+<p><strong>作者：AI 酋长 Andy</strong> · 微信 <strong><code>AIPMAndy</code></strong> · 官网 <strong>https://metaver.vip/</strong> · <a href="https://metaver.vip/services" rel="noopener noreferrer" target="_blank">AI / 职业服务</a></p>
+<p><img alt="REA 教程封面" src="../assets/social-preview.svg"/></p>
+<p><strong>官网（发布后）</strong>：<code>https://aipmandy.github.io/rea-guide-cn/</code>（在 Pages 部署成功前不应声称可访问）<br/>
+<strong>目标 GitHub 仓库（尚需创建）</strong>：<code>AIPMAndy/rea-guide-cn</code>；官方工具仓库：<a href="https://github.com/morluto/rea" rel="noopener noreferrer" target="_blank">https://github.com/morluto/rea</a>。</p>
+<h2 id="这份教程有什么">这份教程有什么</h2>
+<ul>
+<li><strong>38 章完整内容</strong>：安装、Agent/MCP、CLI、JS、Electron、Native、.NET、Android、Evidence、安全与重建。</li>
+<li><strong>64 条可复制任务指令</strong>：用于 Codex/Claude Code/Cursor，默认先取证、再审批、再运行。</li>
+<li><strong>12 个分级案例</strong>：1 个原创可执行 Node 样例，2 个上游官方演示，其余明确是教学实验计划。</li>
+<li><strong>30 天训练计划</strong> 与 <strong>12 项红队自检</strong>，浏览器本地保存进度。</li>
+<li><strong>原创静态网站</strong>：无需服务器和付费 API，GitHub Pages 即可发布。</li>
+</ul>
+<h2 id="一分钟理解-rea">一分钟理解 REA</h2>
+<p>REA 是面向 coding agent 的逆向工程编排工具，通过 MCP/CLI 连接静态与动态分析能力；<strong>不能一键还原开发者原始源码</strong>，也不能取代 Hopper / Ghidra / IDA 的商业或独立许可。</p>
+<p>官方： <a href="https://rea.tools/" rel="noopener noreferrer" target="_blank">rea.tools</a> · <a href="https://github.com/morluto/rea" rel="noopener noreferrer" target="_blank">morluto/rea</a></p>
+<h2 id="mac-codex-安装路线">Mac + Codex 安装路线</h2>
+<pre><code class="language-bash">node --version
+npm --version
+npx rea-agents@latest setup
+# 审阅将修改的 Agent 配置及备份，批准后重启 Codex
+npx -y rea-agents@latest doctor --json
+</code></pre>
+<p>Node 版本门槛核查于 2026-10-21：Node 22.19+、24.11+ 或 26+（具体以你实际安装的 REA 版本为准）。<a href="docs/INSTALL-MAC.html">完整 Mac 安装指南</a>。</p>
+<p>静态 JS 试验：</p>
+<pre><code class="language-bash">cd examples/mini-app
+node test.mjs
+# 之后使用 REA 官方静态分析命令，对该目录绝对路径做分析
+</code></pre>
+<p><a href="examples/mini-app/README.html">Mini App 详细实验</a> · <a href="docs/CLI-CHEATSHEET.html">REA CLI 速查</a></p>
+<h2 id="38-章全目录">38 章全目录</h2>
+<ul>
+<li><a href="guides/01-intro.html">01｜认识 REA 与边界</a></li>
+<li><a href="guides/02-install-mac.html">02｜Mac 从零安装</a></li>
+<li><a href="guides/03-install-cross-platform.html">03｜Windows 与 Linux</a></li>
+<li><a href="guides/04-agents.html">04｜Codex / Claude / Cursor 接入</a></li>
+<li><a href="guides/05-first-lab.html">05｜首个十分钟逆向任务</a></li>
+<li><a href="guides/06-cli.html">06｜REA CLI 常用命令</a></li>
+<li><a href="guides/07-evidence.html">07｜Evidence 证据链</a></li>
+<li><a href="guides/08-javascript-electron.html">08｜JavaScript / Electron 逆向</a></li>
+<li><a href="guides/09-website.html">09｜网页与运行观察</a></li>
+<li><a href="guides/10-native.html">10｜原生程序与反编译器</a></li>
+<li><a href="guides/11-calculator.html">11｜Windows Calculator 百分号案例</a></li>
+<li><a href="guides/12-dinosaur.html">12｜Chrome 小恐龙加速规则案例</a></li>
+<li><a href="guides/13-android.html">13｜Android APK 静态分析</a></li>
+<li><a href="guides/14-dotnet.html">14｜.NET 程序分析</a></li>
+<li><a href="guides/15-formats.html">15｜Go / Rust / WASM / ELF</a></li>
+<li><a href="guides/16-sqlite.html">16｜SQLite、JSON 与本地数据</a></li>
+<li><a href="guides/17-captures.html">17｜网络抓包和动态行为</a></li>
+<li><a href="guides/18-prompts.html">18｜提示词设计与反证</a></li>
+<li><a href="guides/19-rebuild.html">19｜从观察到重建</a></li>
+<li><a href="guides/20-troubleshoot.html">20｜安装故障排除</a></li>
+<li><a href="guides/21-maintenance.html">21｜更新、迁移与卸载</a></li>
+<li><a href="guides/22-legal.html">22｜许可、隐私与负责任使用</a></li>
+<li><a href="guides/23-contribute.html">23｜发布 Evidence 与社区协作</a></li>
+<li><a href="guides/24-indie-workflow.html">24｜一人开发者逆向工作流</a></li>
+</ul>
+<h2 id="v5-专项内容与可阅读网站">V5 专项内容与可阅读网站</h2>
+<p><strong>不再只有摘要弹窗</strong>：每一章都可通过 <code>pages/guides/XX-*.html</code> 完整阅读；文档、案例、模板全部有静态 HTML 页面，支持手机浏览，不需依赖 Markdown 渲染服务。</p>
+<ul>
+<li><strong>38 章</strong>：新增桌面包、Go/Rust、GPU、GGUF/safetensors、IL2CPP、Godot、WASM、EVM、ADB、Flutter、固件、网络与崩溃记录、PyInstaller、受控进程捕获。</li>
+<li><strong>64 条可复制指令</strong>：每条都包含授权范围、证据和反证。</li>
+<li><strong>12 个案例入口</strong>：新增模型文件的原创合成样例及未实测研究方案；来源证据分级明确。</li>
+<li><strong>28 类 REA 官方能力覆盖矩阵</strong>：与上游 README 对照，明确官方发布与当前 npm 可用不是一回事。</li>
+<li><strong>72 个完整 HTML 阅读页</strong>（内容维护阶段，文件数随贡献扩展），并公开 <a href="docs/BENCHMARK.html">Benchmark 协议</a>、<a href="docs/PROVENANCE.html">证据等级</a>、<a href="docs/CAPABILITIES.html">功能覆盖</a>。</li>
+</ul>
+<p><strong>新增章节</strong>：</p>
+<ul>
+<li><a href="guides/25--.html">25｜桌面安装目录的构成与分析入口</a></li>
+<li><a href="guides/26-go-rust-.html">26｜Go / Rust 产物元数据与供应链线索</a></li>
+<li><a href="guides/27-gpu-code-objects.html">27｜GPU 二进制、PTX 与设备兼容性</a></li>
+<li><a href="guides/28-gguf-safetensors.html">28｜GGUF / safetensors 模型文件检查</a></li>
+<li><a href="guides/29-il2cpp-metadata.html">29｜Unity IL2CPP 元数据安全检查</a></li>
+<li><a href="guides/30-godot-pck.html">30｜Godot PCK 资源结构与可复现导出</a></li>
+<li><a href="guides/31-wasm-artifact.html">31｜WASM 模块导入导出与 ABI 理解</a></li>
+<li><a href="guides/32-offline-evm.html">32｜EVM 字节码只读结构调查</a></li>
+<li><a href="guides/33-android-devices.html">33｜Android ADB 与设备取证范围</a></li>
+<li><a href="guides/34-flutter-metadata.html">34｜Flutter / Dart APK 构建来源观察</a></li>
+<li><a href="guides/35-firmware.html">35｜固件镜像清单与安全抽取</a></li>
+<li><a href="guides/36-saved-captures.html">36｜HAR / PCAP / 崩溃记录取证</a></li>
+<li><a href="guides/37-pyinstaller.html">37｜PyInstaller Python 打包程序静态识别</a></li>
+<li><a href="guides/38-process-behavior.html">38｜受控进程运行与 Evidence 对照实验</a></li>
+</ul>
+<h2 id="项目质量与安全">项目质量与安全</h2>
+<ul>
+<li><a href="docs/SOURCES.html">官方来源台账</a> · <a href="docs/AUDIT.html">对抗式审核报告</a> · <a href="docs/SAFETY.html">安全与许可</a></li>
+<li><a href="templates/experiment.html">实验模板</a> · <a href="templates/function-dossier.html">函数证据档案</a> · <a href="templates/legal-review.html">合法授权检查</a> · <a href="templates/rebuild-spec.html">原创重建规格</a></li>
+<li><a href="docs/DEPLOY.html">GitHub Pages 发布步骤</a></li>
+</ul>
+<pre><code class="language-bash">python3 -m unittest discover -s tests -v
+node examples/mini-app/test.mjs
+python3 -m http.server 8000
+</code></pre>
+<p>这份教程的本地单元测试只验证<strong>本站及原创示例</strong>，不能证明作者已经在你的机器上真实运行 REA。官方案例按其原始出处引用；请勿将教学计划包装成已复现客户案例。</p>
+<h2 id="协议与贡献">协议与贡献</h2>
+<ul>
+<li>原创网站、原创 JS 示例代码：MIT License（见 LICENSE）。</li>
+<li>教程文字：CC BY 4.0（见 LICENSE-DOCS.md）。</li>
+<li>第三方代码、软件、Logo、截图保留原有权利与许可证；不对它们二次授权。</li>
+</ul>
+<p>欢迎用 PR 提交真实匿名化实验记录，必须给出环境、工具版本、来源、反证和授权边界。另见 <a href="CONTRIBUTING.html">CONTRIBUTING.md</a>。</p>
+<hr/>
+<p>微信 <strong>AIPMAndy</strong> ｜ https://metaver.vip/ ｜ https://metaver.vip/services</p>
+</div><div class="reading-cta"><div><strong>AI 酋长 Andy</strong><p>免费开源教程，可持续提交实测与反证。微信：AIPMAndy</p></div><div><button type="button" data-wechat>复制微信号</button><a href="https://metaver.vip/" target="_blank" rel="noopener noreferrer">我的官网 ↗</a></div></div></main></div>
+<div class="mobile-cta"><button type="button" data-wechat>微信 AIPMAndy · 复制</button><a href="https://metaver.vip/">作者官网 ↗</a></div><div class="toast" id="toast" role="status" aria-live="polite"></div><script src="../assets/contact.js" defer></script></body></html>
