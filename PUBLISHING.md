@@ -1,34 +1,27 @@
-# 把 rea-guide-cn 发布到 GitHub 和 Pages
+# REA V5 开源与网站发布记录
 
-> 预定的独立开源仓库：`AIPMAndy/rea-guide-cn`，目前在 GitHub 创建之前不应当作已上线地址。
+**更新时间：2026-10-22**。
 
-## 第一步：创建空仓库
+## 已完成
 
-打开 https://github.com/new ，Owner 选择 `AIPMAndy`，Repository name 输入 `rea-guide-cn`，选择 Public。建议不要勾选自动 README、.gitignore 或 License（本项目已经有）。
+- [x] GitHub 公开仓库：https://github.com/AIPMAndy/rea-guide-cn
+- [x] 将 V5 的 **177 个原始文件**完整推送到 `main`；已确认完整 HTML 章节阅读页存在。
+- [x] `MIT License` 及文档授权说明可浏览。
+- [x] GitHub Actions 的 `validate` 作业成功（工程、Node 原创示例、合成模型测试和 Evidence 校验）。
+- [x] 正式自动部署工作流：`.github/workflows/pages.yml`。
 
-## 第二步：推送全部文件
+## 尚需启用 GitHub Pages
 
-解压 `rea-guide-cn-release-v5.zip` 后，在包含 README.md 的根目录打开终端：
+打开 [Pages 设置](https://github.com/AIPMAndy/rea-guide-cn/settings/pages)，在 **Build and deployment → Source** 选择 **GitHub Actions**，如果有 Save 按钮则保存。
 
-```bash
-git init -b main
-git add .
-git commit -m "feat: publish REA Chinese field guide v5"
-git remote add origin https://github.com/AIPMAndy/rea-guide-cn.git
-git push -u origin main
-```
+当前配置的自动 Pages 创建方式返回 `Resource not accessible by integration`。这意味着该设置必须由仓库管理员操作，不能将此次失败解读为页面源码有问题。
 
-以上需要你具备目标仓库的写入权限，可能通过 GitHub 凭证或 SSH 完成。**若同名仓库后来已有其他代码，先比较并处理冲突，禁止强制覆盖。**
+设置后到 [Actions](https://github.com/AIPMAndy/rea-guide-cn/actions) 重新运行 `Validate and deploy REA Guide`，或向 `main` 推送新提交。
 
-## 第三步：启用网站
+**目标官网地址：** https://aipmandy.github.io/rea-guide-cn/ ；只有 GitHub deploy 作业变为 success，且公开 HTTP 页面可用时，才宣传网站已上线。
 
-仓库 Settings → Pages → Build and deployment → Source 选择 GitHub Actions。工作流 `.github/workflows/pages.yml` 会先运行校验，再将项目部署到 Pages。
+## 对外分享之前复查
 
-发布完成地址应为 `https://aipmandy.github.io/rea-guide-cn/`；只有 GitHub `deploy` 状态 success 且实际页面可访问，才能在公开内容中声称“官网上线”。
+手机/桌面：首页、64 条指令搜索、38 章全文页、来源跳转、案例、微信复制和官网入口；避免引用缺乏许可的第三方逆向成果。
 
-## 第四步：对外展示前复核
-
-- 桌面、iOS/Android：正文布局、复制、全文阅读页、官方能力筛选与进度勾选。
-- `https://metaver.vip/` 与微信 `AIPMAndy` 入口正确。
-- 所有研究案例都明确区分“官方资料”与“个人实际复现”。
-- README 的双协议、上游 REA 地址与 Node 版本前提无误。
+独立编辑：**AI 酋长 Andy** · 微信 **AIPMAndy** · https://metaver.vip/
