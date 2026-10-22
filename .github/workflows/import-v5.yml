@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   import:
-    if: ${{ contains(github.event.head_commit.message, 'bootstrap: retry REA import') }}
+    if: ${{ contains(github.event.head_commit.message, 'retry REA import') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
