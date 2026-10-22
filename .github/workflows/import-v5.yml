@@ -1,0 +1,71 @@
+name: Import full REA V5 release and publish
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: rea-v5-initial
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify and unpack original 177-file release
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '55752cf5cd15989291ddc795d8e099f94021d58ffb2bb3fd0935d21c164b5226  .release/rea-guide-cn-v5.tar.xz' | sha256sum -c -
+          test "$(tar -tJf .release/rea-guide-cn-v5.tar.xz | wc -l)" -eq 177
+          tar -xJf .release/rea-guide-cn-v5.tar.xz -C .
+          test -f index.html
+          test -f data/content.json
+          test -f .github/workflows/pages.yml
+          test -f LICENSE
+          rm -rf .release
+          rm .github/workflows/import-v5.yml
+      - name: Run project tests before publishing
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s tests -v
+          node --check assets/site.js
+          node --check assets/contact.js
+          node examples/mini-app/test.mjs
+          python3 -m unittest discover -s examples/model-metadata -p 'test_*.py' -v
+          python3 tools/validate_evidence.py examples/mini-app/evidence-manifest.json
+      - name: Publish expanded files to main branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat: release complete REA V5 guide (177 files) [imported]"
+          git push origin HEAD:main
+  deploy:
+    needs: import
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://aipmandy.github.io/rea-guide-cn/
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - uses: actions/deploy-pages@v4
