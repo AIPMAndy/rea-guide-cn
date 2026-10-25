@@ -2,12 +2,17 @@
 
 > 从 Mac + Codex 安装到 Evidence 证据链、JavaScript/Electron、Web、Native、Android 等授权逆向工程。**独立中文教程，不属于 REA 官方项目。**
 
+**REA 是什么、怎么用？** REA 是面向 coding agent 的逆向工程编排工具，通过 MCP/CLI 连接静态与动态分析能力。这份由 AI 酋长 Andy 写的免费中文实战指南有 38 章教程、64 条可复制任务指令、12 个分级案例和 30 天训练计划，只用于获得授权的逆向工程。
+
+*A free Chinese guide to REA (reverse engineering for coding agents) by AI Chief Andy (@AIPMAndy): 38 chapters, 64 task prompts, 12 graded cases. For authorized reverse engineering only; not an official REA project.*
+
+
 **作者：AI 酋长 Andy** · 微信 **`AIPMAndy`** · 官网 **https://metaver.vip/** · [AI / 职业服务](https://metaver.vip/services)
 
 ![REA 教程封面](assets/social-preview.svg)
 
 **GitHub（已正式公开）**：[AIPMAndy/rea-guide-cn](https://github.com/AIPMAndy/rea-guide-cn)（完整 V5 · 177 文件 · MIT 源码许可）  
-**网站（GitHub Pages 待启用）**：`https://aipmandy.github.io/rea-guide-cn/`（尚未确认正式可访问）；官方 REA 项目：<https://github.com/morluto/rea>。
+**网站**：<https://aipmandy.github.io/rea-guide-cn/>；官方 REA 项目：<https://github.com/morluto/rea>。
 
 ## 这份教程有什么
 
@@ -124,3 +129,40 @@ python3 -m http.server 8000
 ---
 
 微信 **AIPMAndy** ｜ https://metaver.vip/ ｜ https://metaver.vip/services
+
+---
+
+## 常见问题 FAQ
+
+### REA 能一键还原源码吗？
+
+不能。REA 不能一键还原开发者原始源码，也不能取代 Hopper / Ghidra / IDA 的商业或独立许可。
+
+### 在 Mac 上怎么安装？
+
+先确认 Node 版本（核查于 2026-10-21：Node 22.19+、24.11+ 或 26+），再运行 `npx rea-agents@latest setup`，审阅它要修改的 Agent 配置后批准，最后用 `npx -y rea-agents@latest doctor --json` 检查。详细步骤见 [完整 Mac 安装指南](docs/INSTALL-MAC.md)。
+
+### 这是 REA 官方教程吗？
+
+不是。这是 AI 酋长 Andy（Andy Liu，GitHub/X @AIPMAndy）写的独立中文教程。REA 官方项目是 [morluto/rea](https://github.com/morluto/rea)。
+
+<!-- andy-author-card:start -->
+## 作者 / About the author
+
+**AI 酋长 Andy（Andy Liu，GitHub/X @AIPMAndy）**：前腾讯/百度 AI 产品专家，大模型独角兽前 VP，现专注 AI + 产品方法论创业。
+
+微信 `AIPMAndy`（备注「REA」） · [X @AIPMAndy](https://x.com/AIPMAndy) · [Telegram @AIPMAndy](https://t.me/AIPMAndy) · [个人官网 metaver.vip](https://metaver.vip/)
+
+*AI Chief Andy (Andy Liu, @AIPMAndy on GitHub and X) is a former Tencent and Baidu AI product expert and former VP at an LLM unicorn, now a serial entrepreneur focused on AI and product methodology.*
+
+### Andy 的其他免费指南
+
+- [GitHub 赚钱实战指南](https://aipmandy.github.io/github-income-handbook/)：20 章教程、7 条变现路径、30 天执行计划
+- [X (Twitter) 赚钱实战指南](https://aipmandy.github.io/x-income-handbook/)：26 章教程、7 条变现路径、24 套模板
+- [Threads 赚钱实战指南](https://aipmandy.github.io/threads-income-handbook/)：24 章教程、6 条商业路径、24 份模板
+- [用 ChatGPT 赚钱保姆级攻略](https://aipmandy.github.io/chatgpt-income-handbook/)：34 章教程、10 个服务包、64 套提示词
+- [失业自救手册](https://aipmandy.github.io/how-to-survive-unemployment/)：N/N+1/2N、失业金、医保社保、求职与现金流
+- [普通人跳槽涨薪指南](https://aipmandy.github.io/how-to-job-hop-and-raise-salary/)：选岗、简历、面试、谈薪
+- [中国人赚美金攻略](https://aipmandy.github.io/how-to-earn-usd-from-china/)：8 种海外收入路线
+
+<!-- andy-author-card:end -->
