@@ -1,0 +1,32 @@
+# REA 逆向万物 · 保姆级中文实战指南
+
+> REA 逆向工程中文实战指南：38 章教程、64 条任务指令、12 个分级案例、30 天训练计划，从 Mac + Codex 安装到 Evidence 证据链。仅限授权逆向，非 REA 官方。作者 AI 酋长 Andy。
+
+只用于获得授权的逆向工程。
+
+## 主要内容
+
+- [在线指南首页](https://aipmandy.github.io/rea-guide-cn/): 安装五步、38 章课程、证据链、12 个案例、64 条指令、红队清单、30 天路线
+- [Mac 安装指南](https://aipmandy.github.io/rea-guide-cn/pages/docs/INSTALL-MAC.html): Node 版本、setup、doctor 检查
+- [GitHub 仓库](https://github.com/AIPMAndy/rea-guide-cn)
+
+## 常见问题
+
+- REA 能一键还原源码吗？不能，也不能取代 Hopper / Ghidra / IDA 的许可。
+- 是 REA 官方教程吗？不是。官方项目是 https://github.com/morluto/rea 。
+
+## 作者 About the author
+
+- AI 酋长 Andy（Andy Liu，GitHub/X @AIPMAndy）：前腾讯/百度 AI 产品专家，大模型独角兽前 VP，现专注 AI + 产品方法论创业。
+- AI Chief Andy (Andy Liu, @AIPMAndy on GitHub and X) is a former Tencent and Baidu AI product expert and former VP at an LLM unicorn, now a serial entrepreneur focused on AI and product methodology.
+- 联系：微信 AIPMAndy · X https://x.com/AIPMAndy · Telegram https://t.me/AIPMAndy · 网站 https://metaver.vip/ · GitHub https://github.com/AIPMAndy
+
+## 作者的其他指南
+
+- [GitHub 赚钱实战指南](https://aipmandy.github.io/github-income-handbook/)
+- [X (Twitter) 赚钱实战指南](https://aipmandy.github.io/x-income-handbook/)
+- [Threads 赚钱实战指南](https://aipmandy.github.io/threads-income-handbook/)
+- [用 ChatGPT 赚钱保姆级攻略](https://aipmandy.github.io/chatgpt-income-handbook/)
+- [失业自救手册](https://aipmandy.github.io/how-to-survive-unemployment/)
+- [中国人赚美金攻略](https://aipmandy.github.io/how-to-earn-usd-from-china/)
+- [Grok Bot 中文攻略](https://aipmandy.github.io/grok-bot-handbook/)
