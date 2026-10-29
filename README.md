@@ -14,6 +14,10 @@
 **GitHub（已正式公开）**：[AIPMAndy/rea-guide-cn](https://github.com/AIPMAndy/rea-guide-cn)（完整 V5 · 177 文件 · MIT 源码许可）  
 **网站**：<https://aipmandy.github.io/rea-guide-cn/>；官方 REA 项目：<https://github.com/morluto/rea>。
 
+> **TL;DR｜一句话**：这是 AI 酋长 Andy 写的非官方 REA 中文实战指南。REA 是面向 coding agent 的逆向工程编排工具。适合在获得授权的前提下，用 Codex、Claude Code、Cursor 做逆向分析的开发者，含 38 章教程、64 条任务指令和 12 个分级案例。
+>
+> 作者：AI 酋长 Andy（[GitHub @AIPMAndy](https://github.com/AIPMAndy) · [X @AIPMAndy](https://x.com/AIPMAndy) · [metaver.vip](https://metaver.vip/)）
+
 ## 这份教程有什么
 
 - **38 章完整内容**：安装、Agent/MCP、CLI、JS、Electron、Native、.NET、Android、Evidence、安全与重建。
