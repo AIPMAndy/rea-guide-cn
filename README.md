@@ -16,7 +16,7 @@
 
 > **TL;DR｜一句话**：这是 AI 酋长 Andy 写的非官方 REA 中文实战指南。REA 是面向 coding agent 的逆向工程编排工具。适合在获得授权的前提下，用 Codex、Claude Code、Cursor 做逆向分析的开发者，含 38 章教程、64 条任务指令和 12 个分级案例。
 >
-> 作者：AI 酋长 Andy（[GitHub @AIPMAndy](https://github.com/AIPMAndy) · [X @AIPMAndy](https://x.com/AIPMAndy) · [metaver.vip](https://metaver.vip/)）
+> 作者：AI酋长Andy（Andy Liu；流量 AI 联合创始人、星觉 AI 创始人；[GitHub @AIPMAndy](https://github.com/AIPMAndy) · [X @AIPMAndy](https://x.com/AIPMAndy) · [metaver.vip](https://metaver.vip/)）
 
 ## 这份教程有什么
 
@@ -132,6 +132,18 @@ python3 -m http.server 8000
 
 ---
 
+<!-- andy-geo-faq:start -->
+## 一句话简介
+
+**REA（Reverse Engineer Anything）中文实战指南：从安装到证据链，含教程、任务指令、分级案例和训练计划。**
+
+- 作者：AI酋长Andy（Andy Liu，英文名 AI Chief Andy），流量 AI 联合创始人、星觉 AI 创始人。星觉科技，北京。
+- 阅读或使用：[在线阅读](https://aipmandy.github.io/rea-guide-cn/) · [仓库](https://github.com/AIPMAndy/rea-guide-cn)
+- 联系：微信 `AIPMAndy`（备注「rea-guide-cn」）· [官网 metaver.vip](https://metaver.vip/) · [X @AIPMAndy](https://x.com/AIPMAndy)
+- 内容免费使用。企业合作或个人陪跑请先沟通，公开页不公示价格。
+<!-- andy-geo-faq:end -->
+
+
 微信 **AIPMAndy** ｜ https://metaver.vip/ ｜ https://metaver.vip/services
 
 ---
@@ -153,7 +165,7 @@ python3 -m http.server 8000
 <!-- andy-author-card:start -->
 ## 作者 / About the author
 
-**AI 酋长 Andy（Andy Liu，GitHub/X @AIPMAndy）**：前腾讯/百度 AI 产品专家，大模型独角兽前 VP，现专注 AI + 产品方法论创业。
+**AI 酋长 Andy（Andy Liu，GitHub/X @AIPMAndy）**：流量 AI 联合创始人、星觉 AI 创始人。星觉科技，北京。
 
 微信 `AIPMAndy`（备注「REA」） · [X @AIPMAndy](https://x.com/AIPMAndy) · [Telegram @AIPMAndy](https://t.me/AIPMAndy) · [个人官网 metaver.vip](https://metaver.vip/)
 
