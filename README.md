@@ -1,5 +1,16 @@
 # REA 逆向万物 · 保姆级中文实战指南
 
+<!-- andy-pdf-edition:start -->
+## 精美 PDF 电子书
+
+[**免费下载《REA 逆向万物实战指南》**](pdf/rea-guide-cn-guide.pdf) · [直接下载 PDF](https://github.com/AIPMAndy/rea-guide-cn/raw/refs/heads/main/pdf/rea-guide-cn-guide.pdf)
+
+**180 页 · A5 手机阅读版 · 可点击目录 · 1.09 MB**  
+整理日期：2026-11-13。包含完整实操正文、案例、模板与原始来源；平台规则与价格沿用原资料的核查日期。
+
+**作者与服务（广告）**：AI 酋长 Andy · 个人微信 **AIPMAndy** · [个人官网](https://metaver.vip/) · [公司官网](https://www.a6no1.cn/)。免费教程可直接使用，咨询与合作自愿选择。
+<!-- andy-pdf-edition:end -->
+
 > 从 Mac + Codex 安装到 Evidence 证据链、JavaScript/Electron、Web、Native、Android 等授权逆向工程。**独立中文教程，不属于 REA 官方项目。**
 
 **REA 是什么、怎么用？** REA 是面向 coding agent 的逆向工程编排工具，通过 MCP/CLI 连接静态与动态分析能力。这份由 AI 酋长 Andy 写的免费中文实战指南有 38 章教程、64 条可复制任务指令、12 个分级案例和 30 天训练计划，只用于获得授权的逆向工程。
